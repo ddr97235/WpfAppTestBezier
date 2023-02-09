@@ -90,7 +90,8 @@ namespace WpfAppTestBezier.View
         private static void OnSoursePointsPropertyChanged(DependencyObject sender, DependencyPropertyChangedEventArgs e)
         {
             Bezier CurrentBezier = (Bezier)sender;
-            CurrentBezier.SoursePoints = (List<Point>?)e.NewValue;
+            var currentList = (List<Point>?)e.NewValue;
+            CurrentBezier.SoursePoints = (currentList==null || currentList!.Count==0) ? null : currentList;
         }
         private static void OnIsVisiblePointChanged(DependencyObject sender, DependencyPropertyChangedEventArgs e)
         {

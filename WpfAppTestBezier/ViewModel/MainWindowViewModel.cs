@@ -112,20 +112,20 @@ namespace WpfAppTestBezier.ViewModel
         private void OnBezierUpdateTimerEvent(object? sender, EventArgs e) => PushValue();
         private void PushValue()
         {
-            if (bezierSoursePoints == null)
+            if (BezierSoursePoints == null)
             {
-                bezierSoursePoints = new();
-                bezierSoursePoints.Add(new Point(0, 0));
+                BezierSoursePoints = new() { new Point(0, 0) };                
             }
-            if (bezierSoursePoints.Count() == 60)
+            if (BezierSoursePoints.Count() == 60)
             {
-                bezierSoursePoints.RemoveAt(0);
+                BezierSoursePoints.RemoveAt(0);
             }
             Random rnd = new Random();
-            Point newPoint = lengthIndex == 0 ? new(rnd.Next(950), rnd.Next(550)) : GetNewPoint(bezierSoursePoints[^1], lengthIndex * 50);
-            bezierSoursePoints.Add(newPoint);
-            ((MainWindow)(Application.Current.MainWindow)).trackingLine.SoursePoints = bezierSoursePoints;
+            Point newPoint = lengthIndex == 0 ? new(rnd.Next(950), rnd.Next(550)) : GetNewPoint(BezierSoursePoints[^1], lengthIndex * 50);
+            BezierSoursePoints.Add(newPoint);
+            //((MainWindow)(Application.Current.MainWindow)).trackingLine.SoursePoints = BezierSoursePoints;
             //OnPropertyChanged("BezierSoursePoints");
+            OnPropertyChangedBezierSoursePoints();
         }
         private Point GetNewPoint(Point prevPoint,int length, int maxX=950, int maxY=550)
         {
@@ -140,6 +140,14 @@ namespace WpfAppTestBezier.ViewModel
             }
             while (!(res.X>=0 && res.X<= maxX && res.Y >= 0 && res.Y <= maxY));
             return res;
+        }
+        private void OnPropertyChangedBezierSoursePoints()
+        {
+            var list = BezierSoursePoints;
+            BezierSoursePoints = null;
+            OnPropertyChanged(nameof(BezierSoursePoints));
+            BezierSoursePoints = list;
+            OnPropertyChanged(nameof(BezierSoursePoints));
         }
     }
 }
