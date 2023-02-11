@@ -17,9 +17,9 @@ namespace WpfAppTestBezier.ViewModel
     {
         public MainWindowViewModel()
         {
-            cpuusageTimer.Tick += new EventHandler(OnCPUusageTimerEvent);
-            cpuusageTimer.Interval = new TimeSpan(0, 0, 0, 0, 250);
-            cpuusageTimer.Start();
+            //cpuusageTimer.Tick += new EventHandler(OnCPUusageTimerEvent);
+            //cpuusageTimer.Interval = new TimeSpan(0, 0, 0, 0, 250);
+            //cpuusageTimer.Start();
             bezierUpdateTimer.Tick += new EventHandler(OnBezierUpdateTimerEvent);
             bezierUpdateTimer.Interval = new TimeSpan(0, 0, 0, 0, 33);
         }
@@ -85,7 +85,7 @@ namespace WpfAppTestBezier.ViewModel
         private DispatcherTimer cpuusageTimer =new();
         private DispatcherTimer bezierUpdateTimer = new();
         private ProcessorName cpuName = new();
-        private PerformanceCounter cpuCounter = new PerformanceCounter("Process", "% Processor Time", Process.GetCurrentProcess().ProcessName);
+        private PerformanceCounter cpuCounter;//= new PerformanceCounter("Process", "% Processor Time", Process.GetCurrentProcess().ProcessName);
         private List<Point>? bezierSoursePoints;
         public List<Point>? BezierSoursePoints
         {
@@ -96,8 +96,11 @@ namespace WpfAppTestBezier.ViewModel
                 OnPropertyChanged(nameof(BezierSoursePoints));
             }
         }
+        public ObservableCollection<Point>? BezierSoursePoints2 { get; set; }
+
+
         public string CPUName => cpuName.CPUName;
-        public string CPUUsage => (int)(cpuCounter.NextValue()) + "%";
+        public string CPUUsage => "_0_";// (int)(cpuCounter.NextValue()) + "%";
         private int lengthIndex = 0;
         public int LengthIndex
         {
@@ -109,7 +112,7 @@ namespace WpfAppTestBezier.ViewModel
             }
         }
         private void OnCPUusageTimerEvent(object? sender, EventArgs e) => OnPropertyChanged(nameof(CPUUsage));                 
-        private void OnBezierUpdateTimerEvent(object? sender, EventArgs e) => PushValue();
+        private void OnBezierUpdateTimerEvent(object? sender, EventArgs e) => PushValue2();
         private void PushValue()
         {
             if (BezierSoursePoints == null)
@@ -127,6 +130,23 @@ namespace WpfAppTestBezier.ViewModel
             //OnPropertyChanged("BezierSoursePoints");
             OnPropertyChangedBezierSoursePoints();
         }
+
+        private void PushValue2()
+        {
+            if (BezierSoursePoints2 == null)
+            {
+                BezierSoursePoints2 = new() { new Point(0, 0) };
+                OnPropertyChanged(nameof(BezierSoursePoints2));
+            }
+            if (BezierSoursePoints2.Count() == 60)
+            {
+                BezierSoursePoints2.RemoveAt(0);
+            }
+            Random rnd = new Random();
+            Point newPoint = lengthIndex == 0 ? new(rnd.Next(950), rnd.Next(550)) : GetNewPoint(BezierSoursePoints2[^1], lengthIndex * 50);
+            BezierSoursePoints2.Add(newPoint);
+        }
+
         private Point GetNewPoint(Point prevPoint,int length, int maxX=950, int maxY=550)
         {
             Vector vector = new();
@@ -141,6 +161,7 @@ namespace WpfAppTestBezier.ViewModel
             while (!(res.X>=0 && res.X<= maxX && res.Y >= 0 && res.Y <= maxY));
             return res;
         }
+        //public Point StartPoint { get; } = new();
         private void OnPropertyChangedBezierSoursePoints()
         {
             var list = BezierSoursePoints;

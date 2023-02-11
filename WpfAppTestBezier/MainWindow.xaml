@@ -45,6 +45,51 @@
                                   StrokeThickness="2"  HeadPointVisibled="True" _SoursePoints="{Binding BezierSoursePoints}"
                                   Visibility="Visible">
             </view:Bezier>
+
+            <view:Bezier2 Foreground="#FFFFE500" Panel.ZIndex="102"  IsVisiblePoint="True" 
+                                  StrokeThickness="2"  HeadPointVisibled="True" _SoursePoints="{Binding BezierSoursePoints2}"
+                                  Visibility="Visible">
+            </view:Bezier2>
+
+            <!--<Path Stroke="Red" StrokeThickness="3" >
+                <Path.Data>
+                    <PathGeometry>
+                        <PathFigure IsClosed="False" StartPoint="559.6062962827477, 111.59100819014418">
+                            <BezierSegment Point1="559.6062962827477, 111.59100819014418" 
+                                           Point2="607.1946087008407,59.492454798344454" 
+                                           Point3="647.8028076897363, 64.45953913138314">
+                            </BezierSegment>
+                        </PathFigure>
+                    </PathGeometry>
+                </Path.Data>
+            </Path>
+            <Path Stroke="Red" StrokeThickness="3">
+                <Path.Data>
+                    <PathGeometry>
+                        <PathFigure IsClosed="False" StartPoint="647.8028076897363, 64.45953913138314">
+                            <BezierSegment Point1="688.4110066786318, 69.42662346442182" 
+                                           Point2="682.4623053271164, 101.17219984157748" 
+                                           Point3="722.0390922383301, 131.45934552229895">
+                            </BezierSegment>
+                        </PathFigure>
+                    </PathGeometry>
+                </Path.Data>
+            </Path>
+
+            <Path Stroke="Red" StrokeThickness="3">
+                <Path.Data>
+                    <PathGeometry>
+                        <PathFigure IsClosed="False" StartPoint="722.0390922383301,131.45934552229895">
+                            <BezierSegment Point1="761.6158791495438, 161.74649120302035" 
+                                           Point2="760.9969615541711, 165.40627640781656" 
+                                           Point3="806.1099553345913, 185.60812185426897">
+                            </BezierSegment>
+                        </PathFigure>
+                    </PathGeometry>
+                </Path.Data>
+            </Path>-->
+
+
         </Canvas>
 
 
