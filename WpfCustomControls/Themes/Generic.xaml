@@ -6,11 +6,11 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type local:CustomBezier2}">
-                    <ControlTemplate.Resources>
+                    <!--<ControlTemplate.Resources>
                         <DataTemplate DataType="{x:Type local:BezierSegmentData}">
                             <local:SegmentBezierControl/>
                         </DataTemplate>
-                    </ControlTemplate.Resources>
+                    </ControlTemplate.Resources>-->
                     <Border Background="{TemplateBinding Background}"
                             BorderBrush="{TemplateBinding BorderBrush}"
                             BorderThickness="{TemplateBinding BorderThickness}">

@@ -13,13 +13,10 @@ namespace WpfCustomControls
         {
             if (value is not BezierSegmentData data)
                 throw new NotImplementedException($"Реализовано только для \"{typeof(BezierSegmentData).FullName}\".");
+
             Vector offset = new Vector(data.StartPoint.X, data.StartPoint.Y);
 
-            string p1 = (data.Point1 - offset).ToString(culture);
-            string p2 = (data.Point2 - offset).ToString(culture);
-            string end = (data.FinishPoint - offset).ToString(culture);
-
-            return $"M0,0 C {p1} {p2} {end}";
+            return string.Format(culture, "M0,0 C {0} {1} {2}", data.Point1 - offset, data.Point2 - offset, data.FinishPoint - offset);
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
