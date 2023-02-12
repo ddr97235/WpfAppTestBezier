@@ -6,6 +6,8 @@
         xmlns:local="clr-namespace:WpfAppTestBezier"
         xmlns:view="clr-namespace:WpfAppTestBezier.View"
         xmlns:vw="clr-namespace:WpfAppTestBezier.ViewModel"
+        xmlns:wpfcustomcontrols="clr-namespace:WpfCustomControls;assembly=WpfCustomControls"
+        xmlns:model="clr-namespace:WpfAppTestBezier.Model"
         mc:Ignorable="d"
         Title="MainWindow" Height="970" Width="1500" WindowStartupLocation="CenterScreen" WindowState="Maximized">
     <Window.DataContext>
@@ -41,15 +43,18 @@
 
         <Canvas Canvas.Top="300" Canvas.Left="50" Width="950" Height="550" ClipToBounds="True">
             <Border  Width="950" Height="550" Background="#FF9CA48A" CornerRadius="10,10,10,10"/>
-            <view:Bezier x:Name="trackingLine"  Foreground="#FFFFE500" Panel.ZIndex="102"  IsVisiblePoint="True" 
+            <!--<view:Bezier x:Name="trackingLine"  Foreground="#FFFFE500" Panel.ZIndex="102"  IsVisiblePoint="True" 
                                   StrokeThickness="2"  HeadPointVisibled="True" _SoursePoints="{Binding BezierSoursePoints}"
                                   Visibility="Visible">
-            </view:Bezier>
+            </view:Bezier>-->
 
-            <view:Bezier2 Foreground="#FFFFE500" Panel.ZIndex="102"  IsVisiblePoint="True" 
+            <!--<view:Bezier2 Foreground="#FFFFE500" Panel.ZIndex="102"  IsVisiblePoint="True" 
                                   StrokeThickness="2"  HeadPointVisibled="True" _SoursePoints="{Binding BezierSoursePoints2}"
-                                  Visibility="Visible">
-            </view:Bezier2>
+                                  Visibility="Visible"/>-->
+            <wpfcustomcontrols:CustomBezier2 Foreground="#FFFFE500" Panel.ZIndex="102"  IsVisiblePoint="True" 
+                                             StrokeThickness="2"  HeadPointVisibled="True" _SoursePoints="{Binding BezierSoursePoints2}"
+                                             Visibility="Visible"
+                                             PointsFunc="{x:Static model:Bezier.PointToBezierList}"/>
 
             <!--<Path Stroke="Red" StrokeThickness="3" >
                 <Path.Data>

@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Windows;
 using System.Windows.Media;
 
@@ -48,7 +50,11 @@ namespace WpfAppTestBezier.Model
         /// <returns> Последовательность точек необходимая для построения кривой</returns>
         /// <remarks>ВНИМАНИЕ! При использовании PolyBezierSegment необходимо указывать начальную точку PathFigure.StartPoint </remarks>
         public static PointCollection GetBezierPointCollection(IList<Point> list,int maxCount=-1)
-        { // максимальное время исполнения 0,00001170сек, реальное в 2-а раза ниже.
+        { 
+            if(list is null)
+                return new PointCollection();
+
+            // максимальное время исполнения 0,00001170сек, реальное в 2-а раза ниже.
             //System.Diagnostics.Stopwatch stopWatch = new();
             //stopWatch.Start();
 
@@ -73,5 +79,7 @@ namespace WpfAppTestBezier.Model
             //System.Diagnostics.Debug.WriteLine("GetBezierPointCollection на "+ listCount.ToString()+ " точек, за " + string.Format("{0:F8}сек", jj) /*jj.ToString()*/);
             return res/*new PointCollection(points)*/;
         }
+
+        public static Func<IList<Point>?, int, List<Point>> PointToBezierList { get; } = (list, maxCount) => GetBezierPointCollection(list, maxCount).ToList();
     }
 }
