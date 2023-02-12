@@ -21,6 +21,19 @@
                                         <Canvas />
                                     </ItemsPanelTemplate>
                                 </ItemsControl.ItemsPanel>
+                                <ItemsControl.ItemContainerStyle>
+                                    <Style TargetType="ContentPresenter">
+                                        <Setter Property="Canvas.Left" Value="{Binding StartPoint.X}"/>
+                                        <Setter Property="Canvas.Top" Value="{Binding StartPoint.Y}"/>
+                                    </Style>
+                                </ItemsControl.ItemContainerStyle>
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate DataType="{x:Type local:BezierSegmentData}">
+                                        <Path Stroke="{Binding Foreground, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:CustomBezier2}}}"
+                                              StrokeThickness="{Binding StrokeThickness, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:CustomBezier2}}}"
+                                              Data="{Binding Converter={local:BezierDataToString}}"/>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
                             </ItemsControl>
                             <Ellipse Stroke="{TemplateBinding Foreground}"
                                      Fill="{TemplateBinding Foreground}"

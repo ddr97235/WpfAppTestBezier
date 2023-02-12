@@ -80,6 +80,7 @@ namespace WpfAppTestBezier.Model
             return res/*new PointCollection(points)*/;
         }
 
-        public static Func<IList<Point>?, int, List<Point>> PointToBezierList { get; } = (list, maxCount) => GetBezierPointCollection(list, maxCount).ToList();
+        public static Func<IList<Point>?, int, List<Point>> PointToBezierList { get; }
+            = (list, maxCount) => GetBezierPointCollection(list, maxCount).ToList();
     }
 }

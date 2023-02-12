@@ -11,10 +11,10 @@
         <Path.Data>
             <PathGeometry>
                 <PathFigure IsClosed="False"
-                                                    StartPoint="{Binding StartPoint}">
+                            StartPoint="{Binding StartPoint}">
                     <BezierSegment Point1="{Binding Point1}"
-                                                           Point2="{Binding Point2}"
-                                                           Point3="{Binding FinishPoint}">
+                                   Point2="{Binding Point2}"
+                                   Point3="{Binding FinishPoint}">
                     </BezierSegment>
                 </PathFigure>
             </PathGeometry>
